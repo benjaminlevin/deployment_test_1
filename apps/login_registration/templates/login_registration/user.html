@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User Page</title>
+    </head>
+    <body>
+    
+        <nav>
+            <h5 class='nav'><a href='/books/'>Home</a></h5>
+            <h5 class='nav'><a href='/books/add'>Add Book and Review</a></h5>
+            <h5 class='nav'><a href='/logout'>Logout</a></h5>
+        </nav>
+
+        <h3>User Alias: {{ user.alias }}</h3>
+        <h4>Name: {{ user.name }}</h4>
+        <h4>Email: {{ user.email }}</h4>
+        <h4>Total Reviews: {{ review_count }}</h4>
+        
+        <h4>Posted Reviews on the following books:</h4>
+        {% for review in reviews %}
+            <ul>
+                <li><a href='/books/{{ review.book.id }}'>{{ review.book.title }}</a></li>
+            </ul>
+        {% endfor %}
+
+    </body>
+</html>

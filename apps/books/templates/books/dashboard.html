@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Books Home</title>
+    </head>
+    <body>
+
+        <nav>
+            <h5> Welcome, {{ request.session.alias }}!</h5>
+            <h5 class='nav'><a href='/books/add'>Add Book and Review</a></h5>
+            <h5 class='nav'><a href='/logout'>Logout</a></h5>
+        </nav>
+
+        <div id='recent'>
+            <h3>Recent Book Reviews</h3>
+            {% for review in recent_reviews %}
+                <a href='/books/{{ review.book.id }}'>{{ review.title }}</a>
+                <h5>Rating: {{ review.rating }} Stars</h5>
+                <h6><a href='/users/{{ review.author.id }}'>{{ review.author.alias }}</a> says: {{ review.content }}</h6>
+                <h6><i>{{ review.date }}</i></h6>
+                {% if review.author.id == request.session.id %}
+                    <h6><a href='/books/{{ review.book.id }}/{{ review.id }}/delete'>Delete this Review</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div id='other_books'>
+            <h3>Other Books with Reviews</h3>
+            {% for book in books %}
+                <h6><a href='/books/{{ book.id }}'>{{ book.title }}</a></h6>
+            {% endfor %}
+        </div>
+
+    </body>
+</html>
